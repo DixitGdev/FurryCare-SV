@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "13386538590",
+    "project_id": "lyfstori-app",
+    "storage_bucket": "lyfstori-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13386538590:android:16b8b3179fd3540fc69ecf",
+        "android_client_info": {
+          "package_name": "com.lyfstori"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13386538590-hnm9ovpm9ovrf1kko8d4pj3gs9totu58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpgb7KQDzI-zziIJZULhE-1JlBGiVKkzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13386538590-hnm9ovpm9ovrf1kko8d4pj3gs9totu58.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13386538590-69dff5tg71bejl1qlt7u96htieorhs6a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lifestory.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

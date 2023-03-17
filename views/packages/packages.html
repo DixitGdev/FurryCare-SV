@@ -1,0 +1,250 @@
+<%- include('../common/header.html')-%>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<div class="toolbar" id="kt_toolbar">
+		<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+			<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+				<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><%= title %></h1>
+				<span class="h-20px border-gray-300 border-start mx-4"></span>
+				<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+					<li class="breadcrumb-item text-dark">Lists</li>
+				</ul>
+			</div>
+			<div class="d-flex align-items-center py-1" >
+				<a href="javascript:;" onclick="add_record();" class="btn btn-sm btn-primary" id="addNew">Add New</a>
+			</div>
+		</div>
+	</div>
+	<div class="post d-flex flex-column-fluid" id="kt_post">
+		<div id="kt_content_container" class="container-xxl">
+			<div class="row g-5 g-xl-8">
+				<div class="col-xl-12">
+					<div class="card card-xl-stretch mb-xl-8">
+						<div class="card-header border-0 pt-5">
+							<h3 class="card-title align-items-start flex-column">
+								<span class="card-label fw-bolder text-dark"><%= title %></span>
+							</h3>
+								<div class="row">
+								<div class="col-3">
+									
+								</div>
+								<div class="col-9">
+									<div class="d-flex align-items-center">
+										<!--begin::Input group-->
+										<div class="position-relative w-md-400px me-md-2">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+											<span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+													<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+											<input type="text" class="form-control form-control-solid ps-10" id="search" name="search" value="" placeholder="Search">
+										</div>
+										<!--end::Input group-->
+										<!--begin:Action-->
+										<div class="d-flex align-items-center">
+											<button type="button" id="myInput" onclick="pagination(1);" class="btn btn-primary me-5">Search</button>
+										</div>
+										<!--end:Action-->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-body pt-5">
+							<div class="table-responsive">
+								<table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+									<thead>
+										<tr class="fw-bolder text-muted">
+                                            <th class="min-w-150px">Category_id</th>
+                                            <th class="min-w-150px">Subcategory_id</th>
+											<th class="min-w-150px">Title</th>
+											<th class="min-w-150px">Description</th>
+                                            <th class="min-w-100px">Price</th>
+                                            <th class="min-w-100px">City</th>
+                                            <th class="min-w-100px">State</th>
+                                            <th class="min-w-100px">Country</th>
+                                            <th class="min-w-100px">For</th>
+                                            <th class="min-w-100px">Action</th>
+										</tr>
+									</thead>
+									<tbody class="table-data">
+										<tr>
+											<td colspan="2">
+												<span class="fw-bold d-block fs-7">Loading...</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="d-flex flex-stack flex-wrap pt-10">
+								<div class="fs-6 fw-bold text-gray-700 pagination-text"></div>
+								<ul class="pagination" id="pagination"></ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered mw-800px">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h2 class="popup-title">Add / Edit <%= title %></h2>
+				<div class="btn btn-sm btn-icon btn-active-color-primary" id="close" data-bs-dismiss="modal">
+					<span class="svg-icon svg-icon-1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+						</svg>
+					</span>
+				</div>
+			</div>
+			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-10">
+				<form id="edit_users" class="form" action="#">
+					<div class="mb-4 text-center">
+					</div>
+                    <label class="required fs-6 fw-bold form-label mb-2">category_id</label>
+                    <div class="col-6">
+                        <select  name="category" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="category_id" data-select2-id="select2-data-19-lzs6" tabindex="-1" aria-hidden="true" id="category" required>
+                            <option >category</option>
+                           
+                        </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-20-9rdz" style="width: 100%;"><span class="selection"></span>
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+
+
+                    <label class="required fs-6 fw-bold form-label mb-2">subcategory_id</label>
+                    <div class="col-6">
+                        <select name="subcategory" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="subcategory_id" data-select2-id="select2-data-19-lzs6" tabindex="-1" aria-hidden="true" id="subcategory" >
+                            <option>no selected category</option>
+                            
+                        </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-20-9rdz" style="width: 100%;"><span class="selection"></span>
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+					<div class="row g-9 mb-5">
+						<div class="col-md-12 fv-row">
+							<label class="required fs-6 fw-bold mb-2">Title</label>
+							<input  type="text" class="form-control form-control-solid" name="title" id="title" required />
+							<input type="hidden" name="Id" id="Id" value="" />
+						</div>
+					</div>
+					<div class="row g-9 mb-5">
+						<div class="col-md-12 fv-row">
+							<label class="required fs-6 fw-bold mb-2">Descreption</label>
+							<input type="text" class="form-control form-control-solid" name="descreption" id="descreption" required />
+						</div>
+					</div>
+					<div class="row g-9 mb-5">
+						<div class="col-md-12 fv-row">
+							<label class="required fs-6 fw-bold mb-2">price</label>
+							<input type="text" class="form-control form-control-solid" name="price" id="price" required />
+						</div>
+					</div>
+
+                    <div class="row mb-10">
+                        <!--begin::Col-->
+                        <div class="col-md-12 fv-row">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold form-label mb-2">Location</label>
+                            <!--end::Label-->
+                            <!--begin::Row-->
+                            <div class="row fv-row fv-plugins-icon-container">
+                                <!--begin::Col-->
+                                <div class="col-4">
+                                    <select name="country" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Country" data-select2-id="select2-data-16-oye2" tabindex="-1" aria-hidden="true" id="country" required>
+                                        <option>Country</option>
+                                
+                                    </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-17-1qs2" style="width: 100%;"></span>
+                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-4">
+                                    <select name="state" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="State" data-select2-id="select2-data-19-lzs6" tabindex="-1" aria-hidden="true" id="state" required>
+                                        <option>No Country Selected</option>
+                                    </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-20-9rdz" style="width: 100%;"><span class="selection"></span>
+                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                <div class="col-4">
+                                    <select name="city" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="City" data-select2-id="select2-data-19-lzs6" tabindex="-1" aria-hidden="true" id="city" required>
+                                        <option>No State Selected</option>
+                                        
+                                    </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-20-9rdz" style="width: 100%;"><span class="selection"></span>
+                                    
+                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <!-- <div class="col-md-4 fv-row fv-plugins-icon-container"> -->
+                            <!--begin::Label-->
+                            <!--end::Label-->
+                            <!--begin::Input wrapper-->
+                            <!-- <div class="position-relative"> -->
+                                <!--begin::Input-->
+                                <!--end::Input-->
+                                <!--begin::CVV icon-->
+                                <!-- <div class="position-absolute translate-middle-y top-50 end-0 me-3"> -->
+                                    <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
+                                    <!-- <span class="svg-icon svg-icon-2hx">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M22 7H2V11H22V7Z" fill="black"></path>
+                                            <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19ZM14 14C14 13.4 13.6 13 13 13H5C4.4 13 4 13.4 4 14C4 14.6 4.4 15 5 15H13C13.6 15 14 14.6 14 14ZM16 15.5C16 16.3 16.7 17 17.5 17H18.5C19.3 17 20 16.3 20 15.5C20 14.7 19.3 14 18.5 14H17.5C16.7 14 16 14.7 16 15.5Z" fill="black"></path>
+                                        </svg>
+                                    </span> -->
+                                    <!--end::Svg Icon-->
+                                <!-- </div> -->
+                                <!--end::CVV icon-->
+                            <!-- </div> -->
+                            <!--end::Input wrapper-->
+                        <!-- <div class="fv-plugins-message-container invalid-feedback"></div></div> -->
+                        <!--end::Col-->
+                    <!-- </div> -->
+
+                    <!-- <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Dropdown button
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div> -->
+					<div class="d-flex flex-wrap align-items-center text-gray-1000 gap-8 mb-12">
+						<!-- <label class="required fs-6 fw-bold form-label mb-2">Location</label> -->
+						<span>Select your pet:</span>
+
+						<div class="form-check form-check-custom form-check-solid">
+							<input class="form-check-input" type="radio" name="pet_type" value="dog" id="all_conditions" checked="checked">
+							<label class="form-check-label" for="all_conditions">Dog</label>
+						</div>
+
+
+						<div class="form-check form-check-custom form-check-solid">
+							<input class="form-check-input" type="radio" name="pet_type" value="cat" id="any_conditions">
+							<label class="form-check-label" for="any_conditions">Cat</label>
+						</div>
+
+					</div>
+					<div class="text-center">
+						<button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+							<span class="indicator-label">Submit</span>
+							<span class="indicator-progress">
+							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include('../common/footer.html')-%>
+
+<!-- <script>
+	$(".form-select-solid").select2({ minimumResultsForSearch: -1});
+</script> -->

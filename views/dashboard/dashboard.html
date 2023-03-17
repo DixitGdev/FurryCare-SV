@@ -1,0 +1,56 @@
+<%- include('../common/header.html')-%>
+	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+		<div class="toolbar" id="kt_toolbar">
+			<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+				<div data-kt-swapper="true" data-kt-swapper-mode="prepend"
+					data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+					class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+					<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
+						<%= title %>
+					</h1>
+				</div>
+			</div>
+		</div>
+		<div class="post d-flex flex-column-fluid" id="kt_post">
+			<div id="kt_content_container" class="container-xxl">
+				<div class="row ">
+					<div class="col-md-12 d-flex">
+						<div class="card mb-5 me-10 col-md-4">
+							<div class="card-body">
+								<h3>
+									<i class="fa fa-users fa-1x me-3"></i>Total Users
+								</h3>
+								<br>
+								<h1 class="md-3 text-success " id="totalUser">
+									0
+								</h1>
+							</div>
+						</div>
+						<div class="card mb-5 me-10 col-md-4">
+							<div class="card-body">
+								<h3>
+									<i class="fa fa-user-plus fa-1x me-3"></i>Today's Registration
+								</h3>
+								<br>
+								<h1 class="md-3 text-primary " id="todayUser">
+									0
+								</h1>
+							</div>
+						</div>
+						<div class="card mb-5 me-10 col-md-4">
+							<div class="card-body">
+								<h3>
+									<i class="fa fa-user-plus fa-1x me-3"></i>Yesterday's Registration
+								</h3>
+								<br>
+								<h1 class="md-3 text-primary " id="yesterdayUser">
+									0
+								</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%- include('../common/footer.html')-%>

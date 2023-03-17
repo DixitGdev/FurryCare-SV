@@ -1,0 +1,108 @@
+<%- include('../../common/header.html')-%>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<div class="toolbar" id="kt_toolbar">
+		<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+			<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+				<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><%= title %></h1>
+				<span class="h-20px border-gray-300 border-start mx-4"></span>
+				<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+					<li class="breadcrumb-item text-dark">Lists</li>
+				</ul>
+			</div>
+			<div class="d-flex align-items-center py-1">
+				<a href="javascript:;" onclick="add_record();" class="btn btn-sm btn-primary">Add New</a>
+			</div>
+		</div>
+	</div>
+	<div class="post d-flex flex-column-fluid" id="kt_post">
+		<div id="kt_content_container" class="container-xxl">
+			<div class="row g-5 g-xl-8">
+				<div class="col-xl-12">
+					<div class="card card-xl-stretch mb-xl-8">
+						<div class="card-header border-0 pt-5">
+							<h3 class="card-title align-items-start flex-column">
+								<span class="card-label fw-bolder text-dark">State: <%= state %></span>
+							</h3>
+						</div>
+						<div class="card-body pt-5">
+							<div class="table-responsive">
+								<table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+									<thead>
+										<tr class="fw-bolder text-muted">
+											<th class="min-w-150px">Name</th>
+											<th class="min-w-150px">Latitude</th>
+											<th class="min-w-150px">Longitude</th>
+											<th class="min-w-100px">Actions</th>
+										</tr>
+									</thead>
+									<tbody class="table-data">
+										<tr>
+											<td colspan="2">
+												<span class="fw-bold d-block fs-7">Loading...</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="d-flex flex-stack flex-wrap pt-10">
+								<div class="fs-6 fw-bold text-gray-700 pagination-text"></div>
+								<ul class="pagination" id="pagination"></ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered mw-650px">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h2 class="popup-title">Add / Edit <%= title %></h2>
+				<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+					<span class="svg-icon svg-icon-1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+						</svg>
+					</span>
+				</div>
+			</div>
+			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-10">
+				<form id="edit_city" class="form" action="#">
+					<div class="mb-4 text-center">
+					</div>
+					<div class="row g-9 mb-5">
+						<div class="col-md-12 fv-row">
+							<label class="required fs-6 fw-bold mb-2">Name</label>
+							<input type="text" class="form-control form-control-solid" name="name" id="name" required />
+							<input type="hidden" name="Id" id="Id" value="" />
+						</div>
+						<div class="col-md-12 fv-row" style="display:inherit;">
+							<div class="col-md-6 fv-row">
+								<label class="required fs-6 fw-bold mb-2">Latitude</label>
+								<input type="text" class="form-control form-control-solid" name="lat" id="lat" required />
+							</div>
+							<div class="me-2"></div>
+							<div class="col-md-6 fv-row ">
+								<label class="required fs-6 fw-bold mb-2 ">Longitude</label>
+								<input type="text" class="form-control form-control-solid" name="long" id="long" required />
+							</div>
+					</div>
+					</div>
+					</div>
+					<div class="text-center mb-2">
+						<button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+							<span class="indicator-label">Submit</span>
+							<span class="indicator-progress">
+							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+</div>
+
+<%- include('../../common/footer.html')-%>

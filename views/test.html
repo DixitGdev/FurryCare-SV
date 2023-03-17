@@ -1,0 +1,441 @@
+<!doctype html>
+<html>
+<head>
+    <title>Lyfstori</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  socket.on('res', function (data) {
+	console.log("receive data -- ", JSON.stringify(data));
+  });
+  //for send data
+  function sendData(en, data) {
+  	var sendData = {
+  		en:en,
+  		data:data
+  	};
+  	socket.emit("req", sendData);
+  	console.log("send data -- ", JSON.stringify(sendData));
+  }
+
+  //JU - join user
+  function JU() {
+    var data = {
+      user_id : JUuser_id.value
+    };
+    sendData("JU", data);
+  }
+
+  //JU - join user
+  function LIST() {
+    var data = {
+      community_id: LISTcommunity_id.value
+    };
+    sendData("LIST", data);
+  }
+
+  //SM - send message
+  function SM() {
+    var data = {
+      user_id: SMuser_id.value,
+      community_id: SMcommunity_id.value,
+      type: SMtype.value,
+      chat_type: SMchat_type.value,
+      message_type: SMmessage_type.value,
+      message: SMmessage.value
+    };
+    sendData("SM", data);
+  }
+
+  //CQ - Common Question
+  function CQ() {
+    var data = {
+      message_id: CQmessage_id.value,
+      message: CQmessage.value
+    };
+    sendData("CQ", data);
+  }
+
+  function REMOVE_MESSAGE() {
+    var data = {
+      message_id: REMOVE_MESSAGEmessage_id.value
+    };
+    sendData("REMOVE_MESSAGE", data);
+  }
+
+  //LIKE
+  function LIKE() {
+    var data = {
+      message_id: LIKEmessage_id.value
+    };
+    sendData("LIKE_MESSAGE", data);
+  }
+
+  //UNLIKE
+  function UNLIKE() {
+    var data = {
+      message_id: UNLIKEmessage_id.value
+    };
+    sendData("UNLIKE_MESSAGE", data);
+  }
+
+  //conversation
+  function CONVERSATION() {
+    var data = {
+      conversation_id : CONVERSIONconversation_id.value,
+      type: CONVERSIONtype.value,
+      start: CONVERSIONstart.value,
+      limit: CONVERSIONlimit.value
+    };
+    sendData("CONVERSATION", data);
+  }
+
+  function ALL_MESSAGE_READ() {
+    var data = {
+      conversation_id : ALL_MESSAGE_READconversation_id.value
+    };
+    sendData("ALL_MESSAGE_READ", data);
+  }
+
+  //community
+  function FOLLOW_COMMUNITY() {
+    var data = {};
+    sendData("FOLLOW_COMMUNITY", data)
+  }
+
+  function JOIN_ROOM() {
+    var data = {
+      room_id: JOIN_ROOMroom_id.value
+    };
+    sendData("JOIN_ROOM", data)
+  }
+
+  function LEAVE_ROOM() {
+    var data = {
+      room_id: LEAVE_ROOMroom_id.value
+    };
+    sendData("LEAVE_ROOM", data)
+  }
+
+  //JU - join user
+  function FRIEND_LIST() {
+    var data = {
+      user_id: FRIEND_LISTfriend_id.value
+    };
+    sendData("FRIEND_LIST", data);
+  }
+
+  function FRIEND_CONVERSATION() {
+    var data = {
+      user_id: FRIEND_CONVERSIONfriend_id.value,
+      conversation_id : FRIEND_CONVERSIONconversation_id.value,
+      type: FRIEND_CONVERSIONtype.value,
+      start: FRIEND_CONVERSIONstart.value,
+      limit: FRIEND_CONVERSIONlimit.value
+    };
+    sendData("FRIEND_CONVERSATION", data);
+  }
+</script>
+<body>
+<h2>Lyfstori service test page</h2>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>JU</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td><input type="text" name="JUuser_id" id="JUuser_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="JU();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>LIST</td>
+    </tr>
+    <tr>
+      <td>community_id</td>
+      <td><input type="text" name="LISTcommunity_id" id="LISTcommunity_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="LIST();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>SM</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td><input type="text" name="SMuser_id" id="SMuser_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>community_id</td>
+      <td><input type="text" name="SMcommunity_id" id="SMcommunity_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td><input type="text" name="SMtype" id="SMtype" value="" /> 0 - Vemtas, 1 - Exchange, 2 - Candid</td>
+    </tr>
+    <tr>
+      <td>chat_type</td>
+      <td><input type="text" name="SMchat_type" id="SMchat_type" value="" /> 0 - one to one, 1 - group chat</td>
+    </tr>
+    <tr>
+      <td>message_type</td>
+      <td><input type="text" name="SMmessage_type" id="SMmessage_type" value="" /> 0 - normal message, 1 - emoji, 2 - attachment, 3 - common question</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td><input type="text" name="SMmessage" id="SMmessage" value="Hello, I am Message!" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="SM();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>CQ</td>
+    </tr>
+    <tr>
+      <td>message_id</td>
+      <td><input type="text" name="CQmessage_id" id="CQmessage_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td><input type="text" name="CQmessage" id="CQmessage" value="Hello, I am Message!" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="CQ();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>REMOVE_MESSAGE</td>
+    </tr>
+    <tr>
+      <td>message_id</td>
+      <td><input type="text" name="REMOVE_MESSAGEmessage_id" id="REMOVE_MESSAGEmessage_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="REMOVE_MESSAGE();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>LIKE_MESSAGE</td>
+    </tr>
+    <tr>
+      <td>message_id</td>
+      <td><input type="text" name="LIKEmessage_id" id="LIKEmessage_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="LIKE();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>UNLIKE_MESSAGE</td>
+    </tr>
+    <tr>
+      <td>message_id</td>
+      <td><input type="text" name="UNLIKEmessage_id" id="UNLIKEmessage_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="UNLIKE();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>CONVERSATION</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>delivery_type - 1. Message sent, 2. Message delivered, 3. Message read</td>
+    </tr>
+    <tr>
+      <td>conversation_id</td>
+      <td><input type="text" name="CONVERSIONconversation_id" id="CONVERSIONconversation_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td><input type="text" name="CONVERSIONtype" id="CONVERSIONtype" value="" /></td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td><input type="text" name="CONVERSIONstart" id="CONVERSIONstart" value="" /></td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td><input type="text" name="CONVERSIONlimit" id="CONVERSIONlimit" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="CONVERSATION();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>ALL_MESSAGE_READ</td>
+    </tr>
+    <tr>
+      <td>conversation_id</td>
+      <td><input type="text" name="ALL_MESSAGE_READconversation_id" id="ALL_MESSAGE_READconversation_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="ALL_MESSAGE_READ();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name ::</td>
+      <td>FOLLOW_COMMUNITY</td>
+    </tr> 
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="FOLLOW_COMMUNITY();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name ::</td>
+      <td>JOIN_ROOM</td>
+    </tr>
+    <tr>
+      <td>room_id</td>
+      <td><input type="text" name="JOIN_ROOMroom_id" id="JOIN_ROOMroom_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="JOIN_ROOM();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name ::</td>
+      <td>LEAVE_ROOM</td>
+    </tr>
+    <tr>
+      <td>room_id</td>
+      <td><input type="text" name="LEAVE_ROOMroom_id" id="LEAVE_ROOMroom_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="LEAVE_ROOM();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+<table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>FRIEND_LIST</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td><input type="text" name="FRIEND_LISTfriend_id" id="FRIEND_LISTfriend_id" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="FRIEND_LIST();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+  <table>
+    <tr>
+      <td>Service Name :: </td>
+      <td>FRIEND_CONVERSATION</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>delivery_type - 1. Message sent, 2. Message delivered, 3. Message read</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td><input type="text" name="FRIEND_CONVERSIONfriend_id" id="FRIEND_CONVERSIONfriend_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>conversation_id</td>
+      <td><input type="text" name="FRIEND_CONVERSIONconversation_id" id="FRIEND_CONVERSIONconversation_id" value="" /></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td><input type="text" name="FRIEND_CONVERSIONtype" id="FRIEND_CONVERSIONtype" value="" /></td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td><input type="text" name="FRIEND_CONVERSIONstart" id="FRIEND_CONVERSIONstart" value="" /></td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td><input type="text" name="FRIEND_CONVERSIONlimit" id="FRIEND_CONVERSIONlimit" value="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" name="submit" value="Submit" onclick="FRIEND_CONVERSATION();" /></td>
+    </tr>
+  </table>
+<br/>
+---------------------------------------------------
+<br/>
+</body>
+</html>
+

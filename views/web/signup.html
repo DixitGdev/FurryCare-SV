@@ -1,0 +1,98 @@
+<%- include('common/header.html')-%>
+
+    <!-- Callback Start -->
+    <div class="container-fluid  my-5 pt-5 login-form" id="signup-form">
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded p-4 p-sm-5 wow fadeInUp" data-wow-delay="0.5s">
+                        <form class="form w-100" novalidate="novalidate" id="kt_login_form" action="#">
+                            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                                style="max-width: 600px;">
+
+                                <h1 class="display-5 mb-5">SignUp</h1>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-sm-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="mail" placeholder="Your Email">
+                                        <label for="mail">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-floating">
+                                        <input type="mobile_no" class="form-control" id="mobile_no"
+                                            placeholder="Your Mobile Number">
+                                        <label for="mobile_no">Your Mobile Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Your Password">
+                                        <label for="password">Your Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Signup Now</button>
+                                </div>
+
+                                <span class="text-center">Already have an account? <a href="/login"> Login
+                                        here</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Callback End -->
+
+
+    <!-- Callback Start -->
+    <div class="container-fluid  my-5 pt-5 login-form" id="otp-form" style="display:none;">
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+
+                    <div class="bg-white border rounded p-4 p-sm-5 wow fadeInUp" data-wow-delay="0.5s">
+                        <form class="form w-100" novalidate="novalidate" id="otp_form" action="#">
+                            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                                style="max-width: 600px;">
+
+                                <h1 class="display-5 mb-5">SignUp</h1>
+                            </div>
+                            <div class="mb-6 text-center">
+                                <div id="otp" class="justify-center otp-input">
+                                    <input
+                                        class="m-2 text-center otp-form-control otp-form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+                                        type="text" id="first" maxlength="1" />
+                                    <input
+                                        class="m-2 text-center otp-form-control otp-form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+                                        type="text" id="second" maxlength="1" />
+                                    <input
+                                        class="m-2 text-center otp-form-control otp-form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+                                        type="text" id="third" maxlength="1" />
+                                    <input
+                                        class="m-2 text-center otp-form-control otp-form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+                                        type="text" id="fourth" maxlength="1" />
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Verify</button>
+                                </div>
+                                <span class="text-center">Already have an account? <a href="/login"> Login
+                                        here</a></span>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Callback End -->
+
+    <%- include('common/footer.html')-%>
